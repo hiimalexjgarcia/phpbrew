@@ -2,9 +2,9 @@
 
 namespace PhpBrew;
 
-use CLIFramework\Logger;
+use PhpBrew\Console\Logger;
 use Exception;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\OptionResult;
 use PhpBrew\Downloader\DownloadFactory;
 use RuntimeException;
 

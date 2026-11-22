@@ -2,15 +2,23 @@
 
 namespace PhpBrew\Command;
 
-use CLIFramework\Command\HelpCommand as BaseHelpCommand;
+use Symfony\Component\Console\Helper\DescriptorHelper;
 
-class HelpCommand extends BaseHelpCommand
+class HelpCommand extends BaseCommand
 {
-    public function execute()
+    public function brief()
     {
-        $args = func_get_args();
+        return 'Display help for a command';
+    }
 
-        if (empty($args)) {
+    public function arguments($args)
+    {
+        $args->add('command_name', 'The command name')->optional();
+    }
+
+    public function execute($commandName = null)
+    {
+        if ($commandName === null) {
             $headline = <<<EOS
   ______ _   _ ____________                   
   | ___ \ | | || ___ \ ___ \                  
@@ -22,9 +30,17 @@ class HelpCommand extends BaseHelpCommand
 
 EOS;
             $this->logger->write($this->formatter->format($headline, 'strong_white'));
+
+            $helper = new DescriptorHelper();
+            $helper->describe($this->logger->getOutput(), $this->application);
+
+            return true;
         }
 
-        // Compatibility: Calling parent::method by call_user_func_array is only supported from 5.3.0
-        return call_user_func_array(array($this, 'parent::execute'), func_get_args());
+        $cmd = $this->application->find($commandName);
+        $helper = new DescriptorHelper();
+        $helper->describe($this->logger->getOutput(), $cmd);
+
+        return true;
     }
 }

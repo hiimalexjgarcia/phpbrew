@@ -3,7 +3,7 @@
 namespace PhpBrew\Command\ExtensionCommand;
 
 use Exception;
-use GetOptionKit\OptionSpecCollection;
+use PhpBrew\Console\OptionCollection as OptionSpecCollection;
 use PhpBrew\Config;
 use PhpBrew\Downloader\DownloadFactory;
 use PhpBrew\Extension\ExtensionDownloader;

@@ -2,10 +2,10 @@
 
 namespace PhpBrew\Command;
 
-use CLIFramework\Command;
-use CLIFramework\ValueCollection;
+use PhpBrew\Command\BaseCommand as Command;
+use PhpBrew\Console\ValueCollection;
 use Exception;
-use GetOptionKit\OptionCollection;
+use PhpBrew\Console\OptionCollection;
 use PhpBrew\Config;
 use PhpBrew\Distribution\DistributionUrlPolicy;
 use PhpBrew\Downloader\DownloadFactory;

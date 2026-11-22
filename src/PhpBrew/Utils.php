@@ -2,7 +2,7 @@
 
 namespace PhpBrew;
 
-use CLIFramework\Logger;
+use PhpBrew\Console\Logger;
 use PhpBrew\Exception\SystemCommandException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

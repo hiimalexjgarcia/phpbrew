@@ -2,8 +2,8 @@
 
 namespace PhpBrew\Command;
 
-use CLIFramework\Command;
-use GetOptionKit\OptionSpecCollection;
+use PhpBrew\Command\BaseCommand as Command;
+use PhpBrew\Console\OptionCollection as OptionSpecCollection;
 use PhpBrew\Config;
 use PhpBrew\Downloader\DownloadFactory;
 use PhpBrew\ReleaseList;

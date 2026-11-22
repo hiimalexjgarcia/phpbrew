@@ -2,9 +2,9 @@
 
 namespace PhpBrew\Downloader;
 
-use CLIFramework\Logger;
-use GetOptionKit\OptionCollection;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\Logger;
+use PhpBrew\Console\OptionCollection;
+use PhpBrew\Console\OptionResult;
 
 class DownloadFactory
 {

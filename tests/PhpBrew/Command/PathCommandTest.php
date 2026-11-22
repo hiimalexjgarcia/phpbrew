@@ -34,6 +34,6 @@ class PathCommandTest extends CommandTestCase
         ob_start();
         $this->runCommandWithStdout("phpbrew path $arg");
         $path = ob_get_clean();
-        $this->assertRegExp($pattern, $path);
+        $this->assertMatchesRegularExpression($pattern, $path);
     }
 }

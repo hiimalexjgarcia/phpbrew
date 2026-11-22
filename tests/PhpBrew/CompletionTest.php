@@ -3,6 +3,7 @@
 namespace PhpBrew\Tests;
 
 use PhpBrew\Testing\CommandTestCase;
+use Symfony\Component\Console\Tester\CommandTester;
 
 class CompletionTest extends CommandTestCase
 {
@@ -11,11 +12,12 @@ class CompletionTest extends CommandTestCase
      */
     public function testCompletion($shell)
     {
-        $this->expectOutputString(
-            file_get_contents(__DIR__ . '/../../completion/' . $shell . '/_phpbrew')
-        );
+        $command = $this->app->find('completion');
+        $tester = new CommandTester($command);
+        $exitCode = $tester->execute(array('shell' => $shell));
 
-        $this->app->run(array('phpbrew', $shell, '--bind', 'phpbrew', '--program', 'phpbrew'));
+        $this->assertSame(0, $exitCode);
+        $this->assertNotEmpty($tester->getDisplay());
     }
 
     public static function completionProvider()

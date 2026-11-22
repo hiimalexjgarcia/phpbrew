@@ -2,7 +2,7 @@
 
 namespace PhpBrew\Command;
 
-use CLIFramework\Command;
+use PhpBrew\Command\BaseCommand as Command;
 use PhpBrew\Config;
 
 class PathCommand extends Command

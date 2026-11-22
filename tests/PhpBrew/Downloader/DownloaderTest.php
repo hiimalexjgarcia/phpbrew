@@ -2,8 +2,8 @@
 
 namespace PhpBrew\Tests\Downloader;
 
-use CLIFramework\Logger;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\Logger;
+use PhpBrew\Console\OptionResult;
 use PhpBrew\Config;
 use PhpBrew\Downloader\DownloadFactory;
 use PhpBrew\Testing\VCRAdapter;

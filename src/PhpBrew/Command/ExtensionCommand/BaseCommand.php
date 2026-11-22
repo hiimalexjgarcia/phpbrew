@@ -2,7 +2,7 @@
 
 namespace PhpBrew\Command\ExtensionCommand;
 
-use CLIFramework\Command;
+use PhpBrew\Command\BaseCommand as Command;
 
 abstract class BaseCommand extends Command
 {

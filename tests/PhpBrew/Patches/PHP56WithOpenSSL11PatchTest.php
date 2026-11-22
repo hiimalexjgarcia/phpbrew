@@ -2,7 +2,7 @@
 
 namespace PhpBrew\Tests\Patches;
 
-use CLIFramework\Logger;
+use PhpBrew\Console\Logger;
 use PhpBrew\Build;
 use PhpBrew\Patches\PHP56WithOpenSSL11Patch;
 use PhpBrew\Testing\PatchTestCase;

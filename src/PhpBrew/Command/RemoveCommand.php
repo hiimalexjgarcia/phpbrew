@@ -5,8 +5,8 @@ namespace PhpBrew\Command;
 /*
  * @codeCoverageIgnore
  */
-use CLIFramework\Command;
-use CLIFramework\Prompter;
+use PhpBrew\Command\BaseCommand as Command;
+use PhpBrew\Console\Prompter;
 use Exception;
 use PhpBrew\BuildFinder;
 use PhpBrew\Config;

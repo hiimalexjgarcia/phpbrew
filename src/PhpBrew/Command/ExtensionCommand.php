@@ -3,7 +3,7 @@
 namespace PhpBrew\Command;
 
 use Exception;
-use GetOptionKit\OptionCollection;
+use PhpBrew\Console\OptionCollection;
 use PhpBrew\Command\ExtensionCommand\BaseCommand;
 use PhpBrew\Config;
 use PhpBrew\Extension\Extension;

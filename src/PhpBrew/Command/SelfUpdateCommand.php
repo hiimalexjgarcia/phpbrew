@@ -2,9 +2,9 @@
 
 namespace PhpBrew\Command;
 
-use CLIFramework\Command;
+use PhpBrew\Command\BaseCommand as Command;
 use Exception;
-use GetOptionKit\OptionCollection;
+use PhpBrew\Console\OptionCollection;
 use PhpBrew\Downloader\DownloadFactory;
 use RuntimeException;
 

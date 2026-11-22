@@ -2,9 +2,9 @@
 
 namespace PhpBrew\Extension\Provider;
 
-use CLIFramework\Logger;
+use PhpBrew\Console\Logger;
 use Exception;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\OptionResult;
 use PEARX\Channel as PeclChannel;
 use PhpBrew\Downloader\DownloadFactory;
 

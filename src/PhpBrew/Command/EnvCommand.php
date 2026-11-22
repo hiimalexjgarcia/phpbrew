@@ -2,7 +2,7 @@
 
 namespace PhpBrew\Command;
 
-use CLIFramework\Command as BaseCommand;
+use PhpBrew\Command\BaseCommand;
 use PhpBrew\BuildFinder;
 use PhpBrew\Config;
 

@@ -2,13 +2,19 @@
 
 namespace PhpBrew\Testing;
 
-use CLIFramework\Testing\CommandTestCase as BaseCommandTestCase;
-use GetOptionKit\Option;
 use PhpBrew\Console;
+use PhpBrew\Console\Option;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Output\BufferedOutput;
 
-abstract class CommandTestCase extends BaseCommandTestCase
+abstract class CommandTestCase extends TestCase
 {
     protected $debug = false;
+
+    /**
+     * @var Console
+     */
+    protected $app;
 
     private $previousPhpBrewRoot;
 
@@ -23,11 +29,6 @@ abstract class CommandTestCase extends BaseCommandTestCase
 
     public function getPrimaryVersion()
     {
-        /*
-        if ($version = getenv('TRAVIS_PHP_VERSION')) {
-            return "php-$version";
-        }
-        */
         return $this->primaryVersion;
     }
 
@@ -43,15 +44,9 @@ abstract class CommandTestCase extends BaseCommandTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->app = $this->setupApplication();
         $this->previousPhpBrewRoot = getenv('PHPBREW_ROOT');
         $this->previousPhpBrewHome = getenv('PHPBREW_HOME');
-
-        // <env name="PHPBREW_ROOT" value=".phpbrew"/>
-        // <env name="PHPBREW_HOME" value=".phpbrew"/>
-
-        // already setup in phpunit.xml, but it seems don't work.
-        // putenv('PHPBREW_ROOT=' . getcwd() . '/.phpbrew');
-        // putenv('PHPBREW_HOME=' . getcwd() . '/.phpbrew');
 
         if ($options = Console::getInstance()->options) {
             $option = new Option('no-progress');
@@ -64,23 +59,12 @@ abstract class CommandTestCase extends BaseCommandTestCase
         }
     }
 
-    /*
-     * we don't have to restore it back. the parent environment variables
-     * won't change if the they are changed inside a process.
-     * but we might want to change it back if there is a test changed the environment variable.
-     */
     protected function tearDown(): void
     {
-        if ($this->previousPhpBrewRoot !== null) {
-            // putenv('PHPBREW_ROOT=' . $this->previousPhpBrewRoot);
-        }
-        if ($this->previousPhpBrewHome !== null) {
-            // putenv('PHPBREW_HOME=' . $this->previousPhpBrewHome);
-        }
-
         if ($this->usesVCR) {
             VCRAdapter::disableVCR();
         }
+        parent::tearDown();
     }
 
     public function assertCommandSuccess($args)
@@ -90,12 +74,9 @@ abstract class CommandTestCase extends BaseCommandTestCase
                 fwrite(STDERR, $args . PHP_EOL);
             }
 
-            ob_start();
-            $ret = parent::runCommand($args);
-            $output = ob_get_contents();
-            ob_end_clean();
-
-            $this->assertTrue($ret, $output);
+            $output = new BufferedOutput();
+            $ret = $this->executeCommand($args, $output);
+            $this->assertTrue($ret, $output->fetch());
         } catch (\CurlKit\CurlException $e) {
             $this->markTestIncomplete($e->getMessage());
         }
@@ -103,15 +84,22 @@ abstract class CommandTestCase extends BaseCommandTestCase
 
     public function runCommand($args)
     {
-        ob_start();
-        $status = parent::runCommand($args);
-        ob_end_clean();
-
-        return $status;
+        $output = new BufferedOutput();
+        return $this->executeCommand($args, $output);
     }
 
     public function runCommandWithStdout($args)
     {
-        return parent::runCommand($args);
+        $output = new BufferedOutput();
+        $ret = $this->executeCommand($args, $output);
+        echo $output->fetch();
+        return $ret;
+    }
+
+    protected function executeCommand($args, BufferedOutput $output)
+    {
+        $console = $this->setupApplication();
+        $tokens = is_array($args) ? $args : preg_split('/\s+/', trim($args));
+        return $console->runWithTry($tokens, $output);
     }
 }

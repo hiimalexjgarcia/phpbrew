@@ -1,4 +1,5 @@
 /vendor
 .phpbrew
 .phpcs.cache
+.phpunit.result.cache
 /build

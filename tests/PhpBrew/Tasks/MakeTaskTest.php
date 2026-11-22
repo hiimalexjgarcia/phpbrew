@@ -2,8 +2,8 @@
 
 namespace PhpBrew\Tests\Tasks;
 
-use CLIFramework\Logger;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\Logger;
+use PhpBrew\Console\OptionResult;
 use PhpBrew\Buildable;
 use PhpBrew\Tasks\MakeTask;
 use PHPUnit\Framework\TestCase;

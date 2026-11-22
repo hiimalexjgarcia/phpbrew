@@ -2,8 +2,8 @@
 
 namespace PhpBrew;
 
-use CLIFramework\Logger;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\Logger;
+use PhpBrew\Console\OptionResult;
 use PhpBrew\Extension\Provider\Provider;
 
 class ExtensionList

@@ -2,8 +2,8 @@
 
 namespace PhpBrew\Tests\Extension;
 
-use CLIFramework\Logger;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\Logger;
+use PhpBrew\Console\OptionResult;
 use PhpBrew\Extension\ExtensionDownloader;
 use PhpBrew\Extension\Provider\BitbucketProvider;
 use PhpBrew\Extension\Provider\GithubProvider;

@@ -3,7 +3,6 @@
 namespace PhpBrew\Downloader;
 
 use CurlKit\CurlDownloader;
-use CurlKit\Progress\ProgressBar;
 use RuntimeException;
 
 class PhpCurlDownloader extends BaseDownloader
@@ -25,7 +24,7 @@ class PhpCurlDownloader extends BaseDownloader
             $downloader->setProxyAuth($proxyAuth);
         }
         if (!$this->options->{'no-progress'} && $this->logger->getLevel() > 2) {
-            $downloader->setProgressHandler(new ProgressBar());
+            $downloader->setProgressHandler(new CurlProgressBar());
         }
         if ($this->options->{'continue'}) {
             $this->logger->warn('--continue is not support by this download.');

@@ -2,8 +2,8 @@
 
 namespace PhpBrew\Extension;
 
-use CLIFramework\Logger;
-use GetOptionKit\OptionResult;
+use PhpBrew\Console\Logger;
+use PhpBrew\Console\OptionResult;
 use PhpBrew\Config;
 use PhpBrew\Tasks\MakeTask;
 use PhpBrew\Utils;
